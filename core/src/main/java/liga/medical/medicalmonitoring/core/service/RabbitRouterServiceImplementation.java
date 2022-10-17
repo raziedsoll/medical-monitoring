@@ -35,8 +35,12 @@ public class RabbitRouterServiceImplementation implements RabbitRouterService {
             switch (messageType) {
                 case DAILY:
                     rabbitSenderService.sendMessage(rabbitMessageDto, QueueNames.DAILY_QUEUE_NAME);
+                    break;
                 case ALERT:
                     rabbitSenderService.sendMessage(rabbitMessageDto, QueueNames.ALERT_QUEUE_NAME);
+                    break;
+                case ERROR:
+                    rabbitSenderService.sendMessage(rabbitMessageDto, QueueNames.ERROR_QUEUE_NAME);
                     break;
                 default:
                     System.out.println("No information");
