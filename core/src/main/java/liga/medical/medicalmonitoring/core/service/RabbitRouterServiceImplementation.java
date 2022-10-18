@@ -39,9 +39,6 @@ public class RabbitRouterServiceImplementation implements RabbitRouterService {
                 case ALERT:
                     rabbitSenderService.sendMessage(rabbitMessageDto, QueueNames.ALERT_QUEUE_NAME);
                     break;
-                case ERROR:
-                    rabbitSenderService.sendMessage(rabbitMessageDto, QueueNames.ERROR_QUEUE_NAME);
-                    break;
                 default:
                     System.out.println("No information");
             }
