@@ -20,7 +20,6 @@
 
     <dependencyManagement>
         <dependencies>
-
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -34,6 +33,13 @@
                 <version>${springboot.test.version}</version>
                 <scope>test</scope>
             </dependency>
+
+
+            <dependency>
+                <groupId>liga.medical</groupId>
+                <artifactId>common-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>liga.medical</groupId>
                 <artifactId>common-dto</artifactId>
@@ -44,12 +50,13 @@
                 <artifactId>common-services</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>liga.medical</groupId>
                 <artifactId>common-utils</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+
             <dependency>
                 <groupId>liga.medical</groupId>
                 <artifactId>monitoring-core-api</artifactId>
