@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitConfiguration {
-    private static final String HOST = "localhost";
+    private static final String HOST = "hostrabbitmq";
 
     @Bean
     public ConnectionFactory connectionFactory() {
