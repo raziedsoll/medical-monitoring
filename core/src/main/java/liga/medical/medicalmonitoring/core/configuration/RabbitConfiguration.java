@@ -1,6 +1,6 @@
 package liga.medical.medicalmonitoring.core.configuration;
 
-import liga.medical.medicalmonitoring.core.model.QueueNames;
+import liga.medical.dto.QueueNames;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitConfiguration {
-    private static final String HOST = "hostrabbitmq";
+    private static final String HOST = "localhost";
 
     @Bean
     public ConnectionFactory connectionFactory() {

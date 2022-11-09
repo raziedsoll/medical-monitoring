@@ -1,17 +1,20 @@
 package liga.medical.medicalmonitoring.core.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import liga.medical.dto.MessageType;
+import liga.medical.dto.QueueNames;
+import liga.medical.dto.RabbitMessageDto;
+import liga.medical.medicalmonitoring.core.annotations.DbLog;
 import liga.medical.medicalmonitoring.core.api.RabbitRouterService;
 import liga.medical.medicalmonitoring.core.api.RabbitSenderService;
 import liga.medical.medicalmonitoring.core.configuration.ExchangeConfiguration;
-import liga.medical.medicalmonitoring.core.model.MessageType;
-import liga.medical.medicalmonitoring.core.model.QueueNames;
 
-import liga.medical.medicalmonitoring.core.model.RabbitMessageDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class RabbitRouterServiceImplementation implements RabbitRouterService {
 
     private final RabbitTemplate rabbitTemplate;
@@ -26,6 +29,7 @@ public class RabbitRouterServiceImplementation implements RabbitRouterService {
         this.rabbitTemplate = rabbitTemplate;
     }
 
+    @DbLog
     @Override
     public void routeMessage(String message) {
         try {
@@ -47,6 +51,7 @@ public class RabbitRouterServiceImplementation implements RabbitRouterService {
         }
     }
 
+    @DbLog
     @Override
     public void routeMessageWithCustomExchange(String message) {
         rabbitTemplate.setExchange(ExchangeConfiguration.DIRECT_EXCHANGE_NAME);
@@ -54,10 +59,10 @@ public class RabbitRouterServiceImplementation implements RabbitRouterService {
         try {
             RabbitMessageDto rabbitMessageDto = objectMapper.readValue(message, RabbitMessageDto.class);
             rabbitTemplate.convertAndSend(rabbitMessageDto.getMessageType().toString(), message);
-            System.out.println("Роутер перенаправил сообщение при помощи кастомного обменника.");
+            log.info("Роутер перенаправил сообщение при помощи кастомного обменника.");
         } catch (Exception ex) {
             rabbitTemplate.convertAndSend(MessageType.ERROR.toString(), ex.getMessage());
-            System.out.println("При перенаправлении сообщения произошла ошибка.");
+            log.info("При перенаправлении сообщения произошла ошибка.");
         }
     }
 }

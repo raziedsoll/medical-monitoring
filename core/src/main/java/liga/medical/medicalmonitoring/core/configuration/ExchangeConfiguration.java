@@ -1,6 +1,6 @@
 package liga.medical.medicalmonitoring.core.configuration;
 
-import liga.medical.medicalmonitoring.core.model.MessageType;
+import liga.medical.dto.MessageType;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
